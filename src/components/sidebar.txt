@@ -1,0 +1,9 @@
+Uses lucide-react icons (lightweight, tree-shakeable).
+
+Each menu item reflects the theme’s text + primary color.
+
+Hover effect → uses theme.colors.surface for highlight.
+
+Supports nested submenus (expand/collapse).
+
+Active menu highlights with theme.colors.primary.
