@@ -104,7 +104,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const themeName = useSelector((s) => s.theme.name);
   const theme = themes[themeName] || themes.light;
-  const [activeMenu, setActiveMenu] = useState("home"); // default active link
+  const [activeMenu, setActiveMenu] = useState("Tabel"); // default active link
 
   return (
     <Bar>
@@ -129,7 +129,7 @@ export default function Header() {
             <li key={index}>
               <a
                 href={menu.url || "#"}
-                onClick={() => {setActiveMenu(menu.name);dispatch(setHeader(menu.name));}}
+                onClick={() => {setActiveMenu(menu.name);dispatch(setHeader({id:index, name:menu.name}));}}
                 style={{
                   color: activeMenu === menu.name ? theme.colors.accent : undefined,
                   fontWeight: activeMenu === menu.name ? "700" : "500",

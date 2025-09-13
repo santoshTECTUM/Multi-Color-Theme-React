@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import MovingBackground from './components/MovingBackground';
 import AnimatedButton from './components/AnimatedButton';
 import styled from 'styled-components';
+import { Outlet } from 'react-router-dom';
 
 const Layout = styled.div`
   display: grid;
@@ -49,7 +50,7 @@ const FooterWrapper = styled.footer`
   background: ${({ theme }) => theme.colors.footer};
 `;
 
-export default function App() {
+const App = () => {
 
   return (
     <Layout>
@@ -63,6 +64,7 @@ export default function App() {
       <Main>
         <h1>Welcome to React Starter</h1>
         <p>Use the theme switcher in header to change colors.</p>
+        <Outlet></Outlet>
         <AnimatedButton>Click me</AnimatedButton>
       </Main>
       <FooterWrapper>
@@ -73,3 +75,5 @@ export default function App() {
 
   );
 }
+
+export default memo(App)

@@ -1,139 +1,367 @@
 import { icons } from "lucide-react";
 import { LogOut, MapPinned, Settings, Phone, Map, FunnelPlus, Grid3x3, IdCard, ChartNoAxesCombined, SquareChartGantt, TextCursorInput, Workflow, BookCheck, Calendar, Cpu } from "lucide-react";
 
-export const menuObject = [{
-    isTooltips: true,
-    name: "Map",
-    icons: <MapPinned />,
-    url: "",
-    submenu: []
+export const menuObject = [
+    //     {
+    //     isTooltips: true,
+    //     name: "Map",
+    //     icons: <MapPinned />,
+    //     url: "",
+    //     submenu: [],
+    //     sideMenu: []
+    // },
+    {
+        isTooltips: true,
+        name: "Table",
+        icons: <Grid3x3 />,
+        url: "#",
+        submenu: [],
+        sideMenu: [
+            {
+                isTooltips: true,
+                name: "Basic Table",
+                icons: <Grid3x3 />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "Sort Table",
+                icons: <Grid3x3 />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "CheckBox Table",
+                icons: <Grid3x3 />,
+                url: "table",
+            }
+        ]
+    },
+    {
+        isTooltips: true,
+        name: "Card",
+        icons: <IdCard />,
+        url: "#",
+        submenu: [],
+        sideMenu: [
+            {
+                isTooltips: true,
+                name: "Basic Card",
+                icons: <IdCard />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "Sort Card",
+                icons: <IdCard />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "CheckBox Card",
+                icons: <IdCard />,
+                url: "table",
+            }
+        ]
+    },
+    {
+        isTooltips: true,
+        name: "Graph",
+        icons: <ChartNoAxesCombined />,
+        url: "#",
+        submenu: [],
+        sideMenu: [
+            {
+                isTooltips: true,
+                name: "Basic Graph",
+                icons: <ChartNoAxesCombined />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "Sort Graph",
+                icons: <ChartNoAxesCombined />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "CheckBox Graph",
+                icons: <ChartNoAxesCombined />,
+                url: "table",
+            }
+        ]
 
-},
-{
-    isTooltips: true,
-    name: "Table",
-    icons: <Grid3x3 />,
-    url: "",
-    submenu: []
 
-},
-{
-    isTooltips: true,
-    name: "Card",
-    icons: <IdCard />,
-    url: "",
-    submenu: []
+    },
+    {
+        isTooltips: true,
+        name: "Button",
+        icons: <SquareChartGantt />,
+        url: "#",
+        submenu: [],
+        sideMenu: [
+            {
+                isTooltips: true,
+                name: "Basic Button",
+                icons: <SquareChartGantt />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "Sort Button",
+                icons: <SquareChartGantt />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "CheckBox Button",
+                icons: <SquareChartGantt />,
+                url: "table",
+            }
 
-},
-{
-    isTooltips: true,
-    name: "Graph",
-    icons: <ChartNoAxesCombined />,
-    url: "",
-    submenu: []
-
-},
-{
-    isTooltips: true,
-    name: "Button",
-    icons: <SquareChartGantt />,
-    url: "",
-    submenu: []
-
-},
-{
-    isTooltips: true,
-    name: "Input",
-    icons: <TextCursorInput />,
-    url: "",
-    submenu: []
-},
-
-{
-    isTooltips: true,
-    name: "Action",
-    icons: <Workflow />,
-    url: "",
-    submenu: []
-},
+        ]
 
 
-{
-    isTooltips: true,
-    name: "Select",
-    icons: <BookCheck />,
-    url: "",
-    submenu: []
-},
+    },
+    {
+        isTooltips: true,
+        name: "Input",
+        icons: <TextCursorInput />,
+        url: "#",
+        submenu: [],
+        sideMenu: [
+            {
+                isTooltips: true,
+                name: "Basic Input",
+                icons: <TextCursorInput />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "Sort Input",
+                icons: <TextCursorInput />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "CheckBox Input",
+                icons: <TextCursorInput />,
+                url: "table",
+            }
+        ]
 
-{
-    isTooltips: true,
-    name: "Date",
-    icons: <Calendar />,
-    url: "",
-    submenu: []
-},
-{
-    isTooltips: true,
-    name: "Chips",
-    icons: <Cpu />,
-    url: "",
-    submenu: []
-},
+    },
+
+    {
+        isTooltips: true,
+        name: "Action",
+        icons: <Workflow />,
+        url: "#",
+        submenu: [],
+        sideMenu: [
+
+            {
+                isTooltips: true,
+                name: "Basic Action",
+                icons: <Workflow />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "Sort Action",
+                icons: <Workflow />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "CheckBox Action",
+                icons: <Workflow />,
+                url: "table",
+            }
+        ]
+
+    },
+
+
+    {
+        isTooltips: true,
+        name: "Select",
+        icons: <BookCheck />,
+        url: "#",
+        submenu: [],
+        sideMenu: [
+            {
+                isTooltips: true,
+                name: "Basic Select",
+                icons: <Workflow />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "Sort Select",
+                icons: <Workflow />,
+                url: "table",
+            },
+            {
+                isTooltips: true,
+                name: "CheckBox Select",
+                icons: <Workflow />,
+                url: "table",
+            }
+        ]
+
+    },
+
+    {
+        isTooltips: true,
+        name: "Date",
+        icons: <Calendar />,
+        url: "#",
+        submenu: [],
+        sideMenu: [{
+            isTooltips: true,
+            name: "Basic Date",
+            icons: <Calendar />,
+            url: "table",
+        },
+        {
+            isTooltips: true,
+            name: "Sort Date",
+            icons: <Calendar />,
+            url: "table",
+        },
+        {
+            isTooltips: true,
+            name: "CheckBox Date",
+            icons: <Calendar />,
+            url: "table",
+        }]
+
+    },
+    {
+        isTooltips: true,
+        name: "Chips",
+        icons: <Cpu />,
+        url: "#",
+        submenu: [],
+        sideMenu: [{
+            isTooltips: true,
+            name: "Basic Chips",
+            icons: <Cpu />,
+            url: "table",
+        },
+        {
+            isTooltips: true,
+            name: "Sort Chips",
+            icons: <Cpu />,
+            url: "table",
+        },
+        {
+            isTooltips: true,
+            name: "CheckBox Chips",
+            icons: <Cpu />,
+            url: "table",
+        }]
+
+    },
 ]
 
 
 
 // export const menuObject = [{
-//   isTooltips: false,  
-//   name: "TQ Score",
+//     isTooltips: false,
+//     name: "TQ Score",
 //     icons: <MapPinned />,
 //     url: "",
-//     submenu: []
+//     submenu: [],
+//     sideMenu: [{
+//         isTooltips: false,
+//         name: "TQ Score1",
+//         icons: <MapPinned />,
+//         url: "",
+//     },
+//     {
+//         isTooltips: false,
+//         name: "TQ Score2",
+//         icons: <MapPinned />,
+//         url: "",
+//     }, {
+//         isTooltips: false,
+//         name: "TQ Score3",
+//         icons: <MapPinned />,
+//         url: "",
+//     }
+//     ]
 
 // },
 // {
-//   isTooltips: false,  
-//   name: "TQ Filter",
+//     isTooltips: false,
+//     name: "TQ Filter",
 //     icons: <FunnelPlus />,
 //     url: "",
 //     submenu: []
-
-// },
-// {
-//   isTooltips: false,  
-//   name: "Voip Corelation",
-//     icons: <Phone />,
-//     url: "",
-//     submenu: [{
-//   isTooltips: false,      
-//   name: "Test",
-//         icons: "",
+//     ,
+//     sideMenu: [{
+//         isTooltips: false,
+//         name: "TQ Score",
+//         icons: <MapPinned />,
 //         url: "",
 //     }]
 
 // },
 // {
-//   isTooltips: false,  
-//   name: "Base Stay",
+//     isTooltips: false,
+//     name: "Voip Corelation",
+//     icons: <Phone />,
+//     url: "",
+//     submenu: [],
+//     sideMenu: [{
+//         isTooltips: false,
+//         name: "TQ Score",
+//         icons: <MapPinned />,
+//         url: "",
+//     }]
+
+// },
+// {
+//     isTooltips: false,
+//     name: "Base Stay",
 //     icons: <Map />,
 //     url: "",
-//     submenu: []
+//     submenu: [],
+//     sideMenu: [{
+//         isTooltips: false,
+//         name: "TQ Score",
+//         icons: <MapPinned />,
+//         url: "",
+//     }]
 
 // },
 // {
-//   isTooltips: false,  
-//   name: "Setting",
+//     isTooltips: false,
+//     name: "Setting",
 //     icons: <Settings />,
 //     url: "",
-//     submenu: []
+//     submenu: [],
+//     sideMenu: [{
+//         isTooltips: false,
+//         name: "TQ Score",
+//         icons: <MapPinned />,
+//         url: "",
+//     }]
 
 // },
 // {
-//   isTooltips: false,  
-//   name: "Logout",
+//     isTooltips: false,
+//     name: "Logout",
 //     icons: <LogOut />,
 //     url: "",
-//     submenu: []
+//     submenu: [],
+//     sideMenu: [{
+//         isTooltips: false,
+//         name: "TQ Score",
+//         icons: <MapPinned />,
+//         url: "",
+//     }]
 // },
 // ]

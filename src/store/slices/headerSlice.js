@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { name: '' };
+const initialState = { name: '', id: null };
 
 const headerSlice = createSlice({
     name: 'header',
     initialState,
     reducers: {
         setHeader(state, action) {
-        console.log(`Setting header to ${action.payload}`);
+            const { id, name } = action.payload;
+            console.log(`Setting header id: ${id}, name: ${name}`);
 
-            state.name = action.payload;
+            state.name = name;
+            state.id = id;
         }
     }
 });

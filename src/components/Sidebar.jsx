@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 import { Home, User, Settings, ChevronDown, ChevronRight } from "lucide-react"; // icon library
 import { useSelector } from "react-redux";
-
+import { menuObject } from "./Header/HeaderObject";
 const Side = styled.aside`
   grid-area: sidebar;
   padding: 16px;
@@ -22,7 +22,7 @@ const MenuItem = styled.div`
   transition: all 0.25s ease;   /* smooth hover effect */
   
   background: ${({ active, theme }) =>
-    active ? theme.colors.primary : "transparent"};
+    active ? theme.colors.secondary : "transpatrent"};
   
   color: ${({ active, theme }) =>
     active ? "#fff" : theme.colors.text};
@@ -47,7 +47,7 @@ const MenuItem = styled.div`
 
   &:hover {
     background: ${({ theme, active }) =>
-    active ? theme.colors.primary : theme.colors.surface};
+    active ? theme.colors.secondary : theme.colors.surface};
     transform: scale(1.05);      /* zoom effect */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); /* subtle lift */
   }
@@ -87,12 +87,16 @@ const ActiveHeader = styled.div`
 `;
 
 
-export default function Sidebar() {
+const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState(null);
   const headerName = useSelector((s) => s.header.name);
+  const headerIndex = useSelector((s) => s.header.id);
+  const menuItems = menuObject[headerIndex]?.sideMenu; // Assuming menuObject is imported or defined elsewhere
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
+
+  console.log(headerName, headerIndex, menuItems, menuObject[headerIndex]?.sideMenu);
 
   return (
     <>
@@ -101,13 +105,17 @@ export default function Sidebar() {
       </ActiveHeader>
       <Side>
         <nav>
-          <MenuItem>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Home size={18} /> Dashboard
-            </div>
-          </MenuItem>
+          {menuItems?.length && menuItems?.map((item, index) => (
+            <MenuItem key={index} active={openMenu === item.name} onClick={() => setOpenMenu(item.name)}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                {item.icons} {item.name}
+              </div>
+            </MenuItem>
+          ))}
 
-          <div>
+
+
+          {/* <div>
             <MenuItem
               onClick={() => toggleMenu("profile")}
               active={openMenu === "profile"}
@@ -128,10 +136,11 @@ export default function Sidebar() {
             <div style={{ display: "flex", alignItems: "center" }}>
               <Settings size={18} /> Settings
             </div>
-          </MenuItem>
+          </MenuItem> */}
         </nav>
       </Side>
     </>
 
   );
 }
+export default  memo(Sidebar)
