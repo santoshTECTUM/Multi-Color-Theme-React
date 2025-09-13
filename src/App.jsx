@@ -7,13 +7,33 @@ import styled from 'styled-components';
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: 240px 1fr;
-  grid-template-rows: 64px 1fr 60px;
+  grid-template-columns: 240px 1fr;  /* sidebar + main */
+  grid-template-rows: 64px 1fr 60px; /* header + content + footer */
   grid-template-areas:
-    "sidebar header"
+    "header header"
     "sidebar main"
-    "sidebar footer";
+    "footer footer";
   min-height: 100vh;
+`;
+
+const HeaderWrapper = styled.header`
+  grid-area: header;
+  // display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo left, menu right */
+  background: ${({ theme }) => theme.colors.primary};
+  padding: 0 24px;
+  height: 64px;
+  z-index: 2;
+`;
+
+
+
+
+const SidebarWrapper = styled.aside`
+  grid-area: sidebar;
+  background: ${({ theme }) => theme.colors.sidebar};
+  padding: 16px;
 `;
 
 const Main = styled.main`
@@ -22,18 +42,33 @@ const Main = styled.main`
   background: ${({ theme }) => theme.colors.background};
 `;
 
-export default function App(){
+const FooterWrapper = styled.footer`
+  grid-area: footer;
+  padding: 16px;
+  background: ${({ theme }) => theme.colors.footer};
+`;
+
+export default function App() {
+
   return (
     <Layout>
-      <Sidebar />
-      <Header />
+      <HeaderWrapper>
+        <Header />
+      </HeaderWrapper>
+      <SidebarWrapper>
+        <Sidebar />
+      </SidebarWrapper>
       <MovingBackground />
       <Main>
         <h1>Welcome to React Starter</h1>
         <p>Use the theme switcher in header to change colors.</p>
         <AnimatedButton>Click me</AnimatedButton>
       </Main>
-      <footer style={{ gridArea: 'footer', padding: 16 }}>Footer area</footer>
+      <FooterWrapper>
+        Footer area
+      </FooterWrapper>
     </Layout>
+
+
   );
 }

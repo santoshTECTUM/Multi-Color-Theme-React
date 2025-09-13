@@ -2,37 +2,115 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme } from '../store/slices/themeSlice';
-import { glassStyle } from '../styles/glassStyle';
 
 const Bar = styled.header`
   grid-area: header;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding: 0 16px;
-  background: ${({ theme }) => theme.colors.header};
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // background: rgba(255, 255, 255, 0.1);
+  // backdrop-filter: blur(12px);
+  // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0 24px;
+  height: 64px;
+  z-index: 2;
 `;
 
-// const Bar = styled.header`
-//   grid-area: header;
-//   height: 64px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   padding: 0 16px;
-//   ${glassStyle};
-// `;
+// Right section (theme switch + menu)
+const RightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 24px;
+`;
 
+// Main menu
+const Menu = styled.ul`
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
 
-export default function Header(){
+  li {
+    position: relative;
+
+    a {
+      color: ${({ theme }) => theme.colors.text};
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      transform-origin: center;
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: ${({ theme }) => theme.colors.accent};
+        transform: translateY(-2px) scale(1.1); /* lift + zoom */
+      }
+    }
+a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: ${({ theme }) => theme.colors.accent};
+  transform: translateY(-2px) scale(1.1);
+}
+    /* Submenu container */
+    ul {
+      list-style: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 10px 0;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.3s ease;
+      min-width: 160px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+      li {
+        padding: 6px 16px;
+
+        a {
+          display: block;
+          padding: 6px 12px;
+          border-radius: 8px;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: ${({ theme }) => theme.colors.accent};
+          }
+        }
+      }
+    }
+
+    /* Show submenu on hover */
+    &:hover > ul {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+`;
+
+export default function Header() {
   const dispatch = useDispatch();
-  const theme = useSelector(s => s.theme.name);
+  const theme = useSelector((s) => s.theme.name);
+
   return (
     <Bar>
-      <div style={{ fontWeight: 700 }}>Logo</div>
-      <div>
-        <select value={theme} onChange={(e)=>dispatch(setTheme(e.target.value))}>
+      {/* Left side */}
+
+      <div style={{ fontWeight: 700 }}>Logo
+
+        <select
+          value={theme}
+          onChange={(e) => dispatch(setTheme(e.target.value))}
+        >
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="ocean">Ocean</option>
@@ -41,6 +119,43 @@ export default function Header(){
           <option value="neon">Neon</option>
         </select>
       </div>
+
+      {/* Right side */}
+      <RightSection>
+
+
+        <Menu>
+          <li>
+            <a href="#home">Home</a>
+          </li>
+
+          <li>
+            <a href="#about">About</a>
+            <ul>
+              <li><a href="#team">Our Team</a></li>
+              <li><a href="#history">History</a></li>
+              <li><a href="#vision">Vision & Mission</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#services">Services</a>
+            <ul>
+              <li><a href="#web">Web Development</a></li>
+              <li><a href="#uiux">UI/UX Design</a></li>
+              <li><a href="#cloud">Cloud Solutions</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#contact">Contact</a>
+            <ul>
+              <li><a href="#support">Support</a></li>
+              <li><a href="#sales">Sales</a></li>
+            </ul>
+          </li>
+        </Menu>
+      </RightSection>
     </Bar>
   );
 }
