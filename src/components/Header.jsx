@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme } from '../store/slices/themeSlice';
-
+import themes from '../theme/themes';
 const Bar = styled.header`
   grid-area: header;
   display: flex;
@@ -99,16 +99,16 @@ a:hover {
 
 export default function Header() {
   const dispatch = useDispatch();
-  const theme = useSelector((s) => s.theme.name);
+  const themeName = useSelector((s) => s.theme.name);
+  const theme = themes[themeName] || themes.light;
+  const [activeMenu, setActiveMenu] = useState("home"); // default active link
 
   return (
     <Bar>
-      {/* Left side */}
-
-      <div style={{ fontWeight: 700 }}>Logo
-
+      <div style={{ fontWeight: 700 }}>
+        Logo
         <select
-          value={theme}
+          value={themeName}
           onChange={(e) => dispatch(setTheme(e.target.value))}
         >
           <option value="light">Light</option>
@@ -120,17 +120,38 @@ export default function Header() {
         </select>
       </div>
 
-      {/* Right side */}
       <RightSection>
-
-
         <Menu>
           <li>
-            <a href="#home">Home</a>
+            <a
+              href="#home"
+              onClick={() => setActiveMenu("home")}
+              style={{
+                color:
+                  activeMenu === "home"
+                    ? theme.colors.accent
+                    : undefined,
+                fontWeight: activeMenu === "home" ? "700" : "500",
+              }}
+            >
+              Home
+            </a>
           </li>
 
           <li>
-            <a href="#about">About</a>
+            <a
+              href="#about"
+              onClick={() => setActiveMenu("about")}
+              style={{
+                color:
+                  activeMenu === "about"
+                    ? theme.colors.accent
+                    : undefined,
+                fontWeight: activeMenu === "about" ? "700" : "500",
+              }}
+            >
+              About
+            </a>
             <ul>
               <li><a href="#team">Our Team</a></li>
               <li><a href="#history">History</a></li>
@@ -139,7 +160,19 @@ export default function Header() {
           </li>
 
           <li>
-            <a href="#services">Services</a>
+            <a
+              href="#services"
+              onClick={() => setActiveMenu("services")}
+              style={{
+                color:
+                  activeMenu === "services"
+                    ? theme.colors.accent
+                    : undefined,
+                fontWeight: activeMenu === "services" ? "700" : "500",
+              }}
+            >
+              Services
+            </a>
             <ul>
               <li><a href="#web">Web Development</a></li>
               <li><a href="#uiux">UI/UX Design</a></li>
@@ -148,7 +181,19 @@ export default function Header() {
           </li>
 
           <li>
-            <a href="#contact">Contact</a>
+            <a
+              href="#contact"
+              onClick={() => setActiveMenu("contact")}
+              style={{
+                color:
+                  activeMenu === "contact"
+                    ? theme.colors.accent
+                    : undefined,
+                fontWeight: activeMenu === "contact" ? "700" : "500",
+              }}
+            >
+              Contact
+            </a>
             <ul>
               <li><a href="#support">Support</a></li>
               <li><a href="#sales">Sales</a></li>

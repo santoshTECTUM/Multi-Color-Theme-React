@@ -14,6 +14,7 @@ const Layout = styled.div`
     "sidebar main"
     "footer footer";
   min-height: 100vh;
+ overflow-x: hidden;
 `;
 
 const HeaderWrapper = styled.header`
@@ -58,7 +59,7 @@ export default function App() {
       <SidebarWrapper>
         <Sidebar />
       </SidebarWrapper>
-      <MovingBackground />
+      {/* <MovingBackground /> */}
       <Main>
         <h1>Welcome to React Starter</h1>
         <p>Use the theme switcher in header to change colors.</p>
