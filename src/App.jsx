@@ -34,7 +34,7 @@ const HeaderWrapper = styled.header`
 const SidebarWrapper = styled.aside`
   grid-area: sidebar;
   background: ${({ theme }) => theme.colors.sidebar};
-  padding: 16px;
+  // padding: 16px;
 `;
 
 const Main = styled.main`

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme } from '../store/slices/themeSlice';
 import themes from '../theme/themes';
+import { menuObject } from './Header/HeaderObject';
+import { setHeader } from '../store/slices/headerSlice';
 const Bar = styled.header`
   grid-area: header;
   display: flex;
@@ -27,6 +29,7 @@ const RightSection = styled.div`
 const Menu = styled.ul`
   list-style: none;
   display: flex;
+  align-items:center;
   gap: 20px;
   margin: 0;
   padding: 0;
@@ -122,83 +125,42 @@ export default function Header() {
 
       <RightSection>
         <Menu>
-          <li>
-            <a
-              href="#home"
-              onClick={() => setActiveMenu("home")}
-              style={{
-                color:
-                  activeMenu === "home"
-                    ? theme.colors.accent
-                    : undefined,
-                fontWeight: activeMenu === "home" ? "700" : "500",
-              }}
-            >
-              Home
-            </a>
-          </li>
+          {menuObject.map((menu, index) => (
+            <li key={index}>
+              <a
+                href={menu.url || "#"}
+                onClick={() => {setActiveMenu(menu.name);dispatch(setHeader(menu.name));}}
+                style={{
+                  color: activeMenu === menu.name ? theme.colors.accent : undefined,
+                  fontWeight: activeMenu === menu.name ? "700" : "500",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                }}
+              >
+                {menu.icons && (
+                  <span title={menu.isTooltips ? menu.name : undefined}>
+                    {menu.icons}
+                  </span>
+                )}
+                {/* Conditionally hide or show menu name */}
+                {!menu.isTooltips && <span>{menu.name}</span>}
+              </a>
 
-          <li>
-            <a
-              href="#about"
-              onClick={() => setActiveMenu("about")}
-              style={{
-                color:
-                  activeMenu === "about"
-                    ? theme.colors.accent
-                    : undefined,
-                fontWeight: activeMenu === "about" ? "700" : "500",
-              }}
-            >
-              About
-            </a>
-            <ul>
-              <li><a href="#team">Our Team</a></li>
-              <li><a href="#history">History</a></li>
-              <li><a href="#vision">Vision & Mission</a></li>
-            </ul>
-          </li>
-
-          <li>
-            <a
-              href="#services"
-              onClick={() => setActiveMenu("services")}
-              style={{
-                color:
-                  activeMenu === "services"
-                    ? theme.colors.accent
-                    : undefined,
-                fontWeight: activeMenu === "services" ? "700" : "500",
-              }}
-            >
-              Services
-            </a>
-            <ul>
-              <li><a href="#web">Web Development</a></li>
-              <li><a href="#uiux">UI/UX Design</a></li>
-              <li><a href="#cloud">Cloud Solutions</a></li>
-            </ul>
-          </li>
-
-          <li>
-            <a
-              href="#contact"
-              onClick={() => setActiveMenu("contact")}
-              style={{
-                color:
-                  activeMenu === "contact"
-                    ? theme.colors.accent
-                    : undefined,
-                fontWeight: activeMenu === "contact" ? "700" : "500",
-              }}
-            >
-              Contact
-            </a>
-            <ul>
-              <li><a href="#support">Support</a></li>
-              <li><a href="#sales">Sales</a></li>
-            </ul>
-          </li>
+              {menu.submenu && menu.submenu.length > 0 && (
+                <ul key={index}>
+                  {menu.submenu.map((sub, subIndex) => (
+                    <li key={subIndex}>
+                      <a href={sub.url || "#"}>
+                        {sub.icons && <span>{sub.icons}</span>}
+                        {sub.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
         </Menu>
       </RightSection>
     </Bar>

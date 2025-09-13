@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Home, User, Settings, ChevronDown, ChevronRight } from "lucide-react"; // icon library
+import { useSelector } from "react-redux";
 
 const Side = styled.aside`
   grid-area: sidebar;
@@ -73,46 +74,64 @@ const SubMenu = styled.div`
   margin-bottom: 8px;
   display: ${({ open }) => (open ? "block" : "none")};
 `;
+const ActiveHeader = styled.div`
+    padding: 10px 18px;
+    margin-top: 4px;
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    background: ${({ theme, active }) =>
+    theme.colors.primary};
+    color: white;
+    text-align: center;
+`;
+
 
 export default function Sidebar() {
   const [openMenu, setOpenMenu] = useState(null);
-
+  const headerName = useSelector((s) => s.header.name);
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
   return (
-    <Side>
-      <nav>
-        <MenuItem>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Home size={18} /> Dashboard
-          </div>
-        </MenuItem>
-
-        <div>
-          <MenuItem
-            onClick={() => toggleMenu("profile")}
-            active={openMenu === "profile"}
-          >
+    <>
+      <ActiveHeader key={headerName}>
+        {headerName || "Welcome!"}
+      </ActiveHeader>
+      <Side>
+        <nav>
+          <MenuItem>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <User size={18} /> Profile
+              <Home size={18} /> Dashboard
             </div>
-            {openMenu === "profile" ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
           </MenuItem>
 
-          <SubMenu open={openMenu === "profile"}>
-            <MenuItem>View Profile</MenuItem>
-            <MenuItem>Edit Profile</MenuItem>
-          </SubMenu>
-        </div>
+          <div>
+            <MenuItem
+              onClick={() => toggleMenu("profile")}
+              active={openMenu === "profile"}
+            >
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <User size={18} /> Profile
+              </div>
+              {openMenu === "profile" ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+            </MenuItem>
 
-        <MenuItem>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Settings size={18} /> Settings
+            <SubMenu open={openMenu === "profile"}>
+              <MenuItem>View Profile</MenuItem>
+              <MenuItem>Edit Profile</MenuItem>
+            </SubMenu>
           </div>
-        </MenuItem>
-      </nav>
-    </Side>
+
+          <MenuItem>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Settings size={18} /> Settings
+            </div>
+          </MenuItem>
+        </nav>
+      </Side>
+    </>
+
   );
 }
