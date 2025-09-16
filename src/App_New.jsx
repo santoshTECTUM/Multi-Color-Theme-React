@@ -62,24 +62,39 @@ const App = () => {
   const handleLogout = () => setIsAuthenticated(false);
 
   return (
-    <ProtectedRoute isAuthenticated={isAuthenticated}>
-      <Layout>
-        <HeaderWrapper>
-          <Header onLogout={handleLogout} />
-        </HeaderWrapper>
-        <SidebarWrapper>
-          <Sidebar />
-        </SidebarWrapper>
-        <MovingBackground />
-        <Main>
-          <h1>Welcome to React Starter</h1>
-          <p>Use the theme switcher in header to change colors.</p>
-          <RouterRender />
-          <AnimatedButton>Click me</AnimatedButton>
-        </Main>
-        <FooterWrapper>Footer area</FooterWrapper>
-      </Layout>
-    </ProtectedRoute>
+    <Routes>
+      {/* Login Page */}
+
+      <Route path="/login" element={
+        <NewLogin onLogin={handleLogin} />
+      } />
+      {/* Protected Layout */}
+      <Route
+        path="/*"
+        element={
+          <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <Layout>
+              <HeaderWrapper>
+                <Header onLogout={handleLogout} />
+              </HeaderWrapper>
+              <SidebarWrapper>
+                <Sidebar />
+              </SidebarWrapper>
+              <MovingBackground />
+              <Main>
+                <h1>Welcome to React Starter</h1>
+                <p>Use the theme switcher in header to change colors.</p>
+                <RouterRender />
+                <AnimatedButton>Click me</AnimatedButton>
+              </Main>
+              <FooterWrapper>Footer area</FooterWrapper>
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+
+
   );
 }
 

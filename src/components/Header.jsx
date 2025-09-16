@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme } from '../store/slices/themeSlice';
 import themes from '../theme/themes';
-import { menuObject } from './Header/HeaderObject';
+import { menuObject } from '../theme/HeaderObject';
 import { setHeader } from '../store/slices/headerSlice';
+import { Navigate, useNavigate } from 'react-router-dom';
 const Bar = styled.header`
   grid-area: header;
   display: flex;
@@ -105,6 +106,12 @@ export default function Header() {
   const themeName = useSelector((s) => s.theme.name);
   const theme = themes[themeName] || themes.light;
   const [activeMenu, setActiveMenu] = useState("Tabel"); // default active link
+  const navigate = useNavigate();
+  const toggleMenu = (menu) => {
+    setActiveMenu(activeMenu === menu ? null : menu.name);
+    let url = menu.sideMenu ? menu.sideMenu[0]?.url : menu.url
+    navigate(url)
+  };
 
   return (
     <Bar>
@@ -128,8 +135,8 @@ export default function Header() {
           {menuObject.map((menu, index) => (
             <li key={index}>
               <a
-                href={menu.url || "#"}
-                onClick={() => {setActiveMenu(menu.name);dispatch(setHeader({id:index, name:menu.name}));}}
+                // href={menu.url}
+                onClick={() => { toggleMenu(menu); dispatch(setHeader({ id: index, name: menu.name })); }}
                 style={{
                   color: activeMenu === menu.name ? theme.colors.accent : undefined,
                   fontWeight: activeMenu === menu.name ? "700" : "500",

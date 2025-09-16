@@ -2,7 +2,8 @@ import React, { memo, useState } from "react";
 import styled from "styled-components";
 import { Home, User, Settings, ChevronDown, ChevronRight } from "lucide-react"; // icon library
 import { useSelector } from "react-redux";
-import { menuObject } from "./Header/HeaderObject";
+import { menuObject } from "../theme/HeaderObject";
+import { useNavigate } from "react-router-dom";
 const Side = styled.aside`
   grid-area: sidebar;
   padding: 16px;
@@ -88,15 +89,25 @@ const ActiveHeader = styled.div`
 
 
 const Sidebar = () => {
-  const [openMenu, setOpenMenu] = useState(null);
+  const navigate = useNavigate();
   const headerName = useSelector((s) => s.header.name);
   const headerIndex = useSelector((s) => s.header.id);
-  const menuItems = menuObject[headerIndex]?.sideMenu; // Assuming menuObject is imported or defined elsewhere
-  const toggleMenu = (menu) => {
-    setOpenMenu(openMenu === menu ? null : menu);
-  };
 
-  console.log(headerName, headerIndex, menuItems, menuObject[headerIndex]?.sideMenu);
+  const menuItems = menuObject[headerIndex]?.sideMenu; // Assuming menuObject is imported or defined elsewhere
+  const [openMenu, setOpenMenu] = useState(menuItems && menuItems[0]?.name || null);
+  const toggleMenu = (menu, index) => {
+    console.log("login menu:", index,menu, menuItems,menuItems[index - 1],);
+    // if (!(index && menuItems[index - 1])) {
+    //   return
+    // }
+    setOpenMenu(openMenu === menu.name ? menuItems[index - 1].name : menu.name);
+    let url = openMenu === menu?.name ? -1 : menu.url
+    console.log("navigate to :", url);
+    navigate(url)
+  };
+  
+
+  // console.log(headerName, headerIndex, menuItems, menuObject[headerIndex]?.sideMenu);
 
   return (
     <>
@@ -106,7 +117,7 @@ const Sidebar = () => {
       <Side>
         <nav>
           {menuItems?.length && menuItems?.map((item, index) => (
-            <MenuItem key={index} active={openMenu === item.name} onClick={() => setOpenMenu(item.name)}>
+            <MenuItem key={index} active={openMenu === item.name} onClick={() => toggleMenu(item, index)}>
               <div style={{ display: "flex", alignItems: "center" }}>
                 {item.icons} {item.name}
               </div>

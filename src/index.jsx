@@ -7,6 +7,7 @@ import store from "./store";
 import themes from "./theme/themes";
 import GlobalStyles from "./styles/globalStyles";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 // 🔥 Wrapper that listens to Redux theme state
 function ThemedApp() {
@@ -16,8 +17,10 @@ function ThemedApp() {
   return (
     <MuiThemeProvider theme={createTheme(currentTheme.muiPalette)}>
       <ThemeProvider theme={currentTheme}>
-        <GlobalStyles />
-        <App />
+        <BrowserRouter>
+          <GlobalStyles />
+          <App />
+        </BrowserRouter>
       </ThemeProvider>
     </MuiThemeProvider>
   );

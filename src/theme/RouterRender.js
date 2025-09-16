@@ -1,0 +1,26 @@
+import React from 'react'
+import { Route, Router, Routes } from 'react-router-dom'
+import { menuObject } from './HeaderObject'
+import { useSelector } from 'react-redux';
+
+const RouterRender = () => {
+  const headerName = useSelector((s) => s.header.name);
+  const headerIndex = useSelector((s) => s.header.id);
+  const menuItems = menuObject[headerIndex]?.sideMenu;
+  console.log(headerName, headerIndex, menuItems);
+
+  return (
+    <>
+    {/* <h1>Router</h1> */}
+      {/* <Router> */}
+      <Routes>
+         {menuItems?.length > 0 ? menuItems?.map((item, index) => (
+          <Route key={index} path={item?.url} element={<>Test Your Code---- {item?.name}</>} />
+        )) :""}
+      </Routes>
+      {/* </Router> */}
+    </>
+  )
+}
+
+export default RouterRender

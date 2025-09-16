@@ -1,6 +1,9 @@
 import { icons } from "lucide-react";
 import { LogOut, MapPinned, Settings, Phone, Map, FunnelPlus, Grid3x3, IdCard, ChartNoAxesCombined, SquareChartGantt, TextCursorInput, Workflow, BookCheck, Calendar, Cpu } from "lucide-react";
-
+import { Component } from "react";
+import BasicTable from "../DemoComponent/Table/BasicTable";
+import SortTable from "../DemoComponent/Table/SortTable";
+import  CheckBoxTable from '../DemoComponent/Table/CheckBoxTable'
 export const menuObject = [
     //     {
     //     isTooltips: true,
@@ -14,26 +17,29 @@ export const menuObject = [
         isTooltips: true,
         name: "Table",
         icons: <Grid3x3 />,
-        url: "#",
+        url: "/table",
         submenu: [],
         sideMenu: [
             {
                 isTooltips: true,
                 name: "Basic Table",
                 icons: <Grid3x3 />,
-                url: "table",
+                url: "/table/basic",
+                component:<BasicTable />
             },
             {
                 isTooltips: true,
                 name: "Sort Table",
                 icons: <Grid3x3 />,
-                url: "table",
+                url: "/table/sort",
+                component:< SortTable />
             },
             {
                 isTooltips: true,
                 name: "CheckBox Table",
                 icons: <Grid3x3 />,
-                url: "table",
+                url: "/table/checkbox",
+                component:<CheckBoxTable />
             }
         ]
     },
@@ -41,26 +47,29 @@ export const menuObject = [
         isTooltips: true,
         name: "Card",
         icons: <IdCard />,
-        url: "#",
+        url: "/card",
         submenu: [],
         sideMenu: [
             {
                 isTooltips: true,
                 name: "Basic Card",
                 icons: <IdCard />,
-                url: "table",
+                url: "/card/basic",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "Sort Card",
                 icons: <IdCard />,
-                url: "table",
+                url: "/table/sort",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "CheckBox Card",
                 icons: <IdCard />,
-                url: "table",
+                url: "/table/checkbox",
+                 component:<CheckBoxTable />
             }
         ]
     },
@@ -68,26 +77,29 @@ export const menuObject = [
         isTooltips: true,
         name: "Graph",
         icons: <ChartNoAxesCombined />,
-        url: "#",
+        url: "/graph",
         submenu: [],
         sideMenu: [
             {
                 isTooltips: true,
                 name: "Basic Graph",
                 icons: <ChartNoAxesCombined />,
-                url: "table",
+                url: "/graph/basic",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "Sort Graph",
                 icons: <ChartNoAxesCombined />,
-                url: "table",
+                url: "/graph/sort",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "CheckBox Graph",
                 icons: <ChartNoAxesCombined />,
                 url: "table",
+                 component:<CheckBoxTable />
             }
         ]
 
@@ -105,18 +117,21 @@ export const menuObject = [
                 name: "Basic Button",
                 icons: <SquareChartGantt />,
                 url: "table",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "Sort Button",
                 icons: <SquareChartGantt />,
                 url: "table",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "CheckBox Button",
                 icons: <SquareChartGantt />,
                 url: "table",
+                 component:<CheckBoxTable />
             }
 
         ]
@@ -135,18 +150,21 @@ export const menuObject = [
                 name: "Basic Input",
                 icons: <TextCursorInput />,
                 url: "table",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "Sort Input",
                 icons: <TextCursorInput />,
                 url: "table",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "CheckBox Input",
                 icons: <TextCursorInput />,
                 url: "table",
+                 component:<CheckBoxTable />
             }
         ]
 
@@ -165,18 +183,21 @@ export const menuObject = [
                 name: "Basic Action",
                 icons: <Workflow />,
                 url: "table",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "Sort Action",
                 icons: <Workflow />,
                 url: "table",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "CheckBox Action",
                 icons: <Workflow />,
                 url: "table",
+                 component:<CheckBoxTable />
             }
         ]
 
@@ -195,18 +216,21 @@ export const menuObject = [
                 name: "Basic Select",
                 icons: <Workflow />,
                 url: "table",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "Sort Select",
                 icons: <Workflow />,
                 url: "table",
+                 component:<CheckBoxTable />
             },
             {
                 isTooltips: true,
                 name: "CheckBox Select",
                 icons: <Workflow />,
                 url: "table",
+                 component:<CheckBoxTable />
             }
         ]
 
@@ -223,18 +247,21 @@ export const menuObject = [
             name: "Basic Date",
             icons: <Calendar />,
             url: "table",
+             component:<CheckBoxTable />
         },
         {
             isTooltips: true,
             name: "Sort Date",
             icons: <Calendar />,
             url: "table",
+             component:<CheckBoxTable />
         },
         {
             isTooltips: true,
             name: "CheckBox Date",
             icons: <Calendar />,
             url: "table",
+             component:<CheckBoxTable />
         }]
 
     },
@@ -249,18 +276,21 @@ export const menuObject = [
             name: "Basic Chips",
             icons: <Cpu />,
             url: "table",
+             component:<CheckBoxTable />
         },
         {
             isTooltips: true,
             name: "Sort Chips",
             icons: <Cpu />,
             url: "table",
+             component:<CheckBoxTable />
         },
         {
             isTooltips: true,
             name: "CheckBox Chips",
             icons: <Cpu />,
             url: "table",
+             component:<CheckBoxTable />
         }]
 
     },

@@ -17,6 +17,7 @@ const light = {
     accent: '#ff5722',
   },
   muiPalette: {
+    divider: "#e0e0e0",
     mode: 'light',
     primary: { main: '#1976d2' },
     secondary: { main: '#ff9800' },
@@ -40,6 +41,7 @@ const dark = {
     accent: '#ff5722',
   },
   muiPalette: {
+    divider: "#2d3748",
     mode: 'dark',
     primary: { main: '#90caf9' },
     secondary: { main: '#f48fb1' },
@@ -63,6 +65,7 @@ const ocean = {
     accent: '#ff5722',
   },
   muiPalette: {
+    divider: "#b3d9e6",
     mode: 'light',
     primary: { main: '#0077b6' },
     secondary: { main: '#00b4d8' },
@@ -86,6 +89,7 @@ const sunset = {
     accent: '#ff5722',
   },
   muiPalette: {
+    divider: "#ffc8a2",
     mode: 'light',
     primary: { main: '#ff6f61' },
     secondary: { main: '#ff9f1c' },
@@ -106,9 +110,10 @@ const forest = {
     footer: '#a5d6a7',
     hover: '#dcedc8',
     border: '#c8e6c9',
-     accent: '#ff5722',
+    accent: '#ff5722',
   },
   muiPalette: {
+    divider: "#c8e6c9",
     mode: 'light',
     primary: { main: '#2e7d32' },
     secondary: { main: '#a5d6a7' },
@@ -129,9 +134,10 @@ const neon = {
     footer: '#1a1a2e',
     hover: '#2e2e46',
     border: '#39395a',
-     accent: '#ff5722',
+    accent: '#ff5722',
   },
   muiPalette: {
+    divider: "#39395a",
     mode: 'dark',
     primary: { main: '#ff00ff' },
     secondary: { main: '#00e5ff' },
