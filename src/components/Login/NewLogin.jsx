@@ -308,63 +308,67 @@ const Button = styled.button`
   }
 `;
 
-const NewLogin = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+const NewLogin = ({onLogin}) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  // alert("test----")
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (username === "admin" && password === "1234") {
+      onLogin()
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("user", username);
+      navigate("/");
+    } else {
+      alert("Invalid credentials");
+    }
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (username === "admin" && password === "1234") {
-            localStorage.setItem("isAuthenticated", "true");
-            localStorage.setItem("user", username);
-            navigate("/dashboard");
-        } else {
-            alert("Invalid credentials");
-        }
-    };
+  console.log("ttttttttttt");
+  
 
-    return (
-        <Wrapper>
-            <MovingBackground />
-            <GlassCard>
-                <Welcome
+  return (
+    <Wrapper>
+      <MovingBackground />
+      <GlassCard>
+        <Welcome
 
-                >
-                    Welcome Back
-                </Welcome>
-                <Title>Login</Title>
-                <Form onSubmit={handleSubmit}>
-                    <ThemedTextField
-                        label="Username"
-                        variant="outlined"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                        fullWidth
-                    />
-                    <ThemedTextField
-                        label="Password"
-                        type="password"
-                        variant="outlined"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        fullWidth
-                    />
+        >
+          Welcome Back
+        </Welcome>
+        <Title>Login</Title>
+        <Form onSubmit={handleSubmit}>
+          <ThemedTextField
+            label="Username"
+            variant="outlined"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            fullWidth
+          />
+          <ThemedTextField
+            label="Password"
+            type="password"
+            variant="outlined"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            fullWidth
+          />
 
-                    <Options>
-                        <label>
-                            <input type="checkbox" /> Remember me
-                        </label>
-                        <a href="/forgot-password">Forgot password?</a>
-                    </Options>
+          <Options>
+            <label>
+              <input type="checkbox" /> Remember me
+            </label>
+            <a href="/forgot-password">Forgot password?</a>
+          </Options>
 
-                    <Button type="submit">Login</Button>
-                </Form>
-            </GlassCard>
-        </Wrapper>
-    );
+          <Button type="submit">Login</Button>
+        </Form>
+      </GlassCard>
+    </Wrapper>
+  );
 };
 
-export default memo(NewLogin);
+export default NewLogin;

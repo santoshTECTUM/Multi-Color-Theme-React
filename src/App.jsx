@@ -55,7 +55,7 @@ const FooterWrapper = styled.footer`
   background: ${({ theme }) => theme.colors.footer};
 `;
 
-const App = () => {
+const AppTest = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const handleLogin = () => setIsAuthenticated(true);
@@ -83,4 +83,4 @@ const App = () => {
   );
 }
 
-export default memo(App)
+export default memo(AppTest)

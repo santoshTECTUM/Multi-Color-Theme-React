@@ -6,6 +6,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = merge(common, {
   mode: 'production',
   devtool: false,
+    devServer: {
+    historyApiFallback: true,  // ✅ add this
+  },
   module: {
     rules: [
       {

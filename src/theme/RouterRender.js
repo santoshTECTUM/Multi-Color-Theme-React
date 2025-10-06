@@ -11,12 +11,15 @@ const RouterRender = () => {
 
   return (
     <>
-    {/* <h1>Router</h1> */}
+      {/* <h1>Router</h1> */}
       {/* <Router> */}
       <Routes>
-         {menuItems?.length > 0 ? menuItems?.map((item, index) => (
-          <Route key={index} path={item?.url} element={<>Test Your Code---- {item?.name}</>} />
-        )) :""}
+        {menuItems?.length > 0 ? menuItems?.map((item, index) => (
+          <Route key={index} path={item?.url} element={item.component} />
+        )) : ""}
+
+        <Route path="/" element={<h2>Welcome! Home Page.</h2>} />
+        <Route path="*" element={<h2>Welcome! Please select a menu item.</h2>} />
       </Routes>
       {/* </Router> */}
     </>

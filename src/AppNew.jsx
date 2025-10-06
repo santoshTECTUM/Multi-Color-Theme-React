@@ -55,20 +55,23 @@ const FooterWrapper = styled.footer`
   background: ${({ theme }) => theme.colors.footer};
 `;
 
-const App = () => {
+const AppNew = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   const handleLogin = () => setIsAuthenticated(true);
   const handleLogout = () => setIsAuthenticated(false);
 
   return (
-    <Routes>
-      {/* Login Page */}
+    <>
+      <Routes>
+        {/* Login Page */}
 
-      <Route path="/login" element={
-        <NewLogin onLogin={handleLogin} />
-      } />
+        <Route path="/login" element={<NewLogin onLogin={handleLogin} />} />
+     
       {/* Protected Layout */}
+
+      {/* dynamic routes rendered by Redux state */}
+
       <Route
         path="/*"
         element={
@@ -92,10 +95,12 @@ const App = () => {
           </ProtectedRoute>
         }
       />
-    </Routes>
+
+ </Routes>
 
 
+    </>
   );
 }
 
-export default memo(App)
+export default memo(AppNew)

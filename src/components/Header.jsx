@@ -101,7 +101,13 @@ a:hover {
   }
 `;
 
-export default function Header() {
+
+const Span = styled.span`
+margin: 5px;
+`
+
+
+export default function Header({onLogout}) {
   const dispatch = useDispatch();
   const themeName = useSelector((s) => s.theme.name);
   const theme = themes[themeName] || themes.light;
@@ -116,11 +122,11 @@ export default function Header() {
   return (
     <Bar>
       <div style={{ fontWeight: 700 }}>
-        Logo
+        <Span onClick={onLogout}  >Logo</Span> 
         <select
           value={themeName}
           onChange={(e) => dispatch(setTheme(e.target.value))}
-        >
+        >activeMenu
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="ocean">Ocean</option>

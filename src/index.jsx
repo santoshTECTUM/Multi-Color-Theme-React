@@ -6,7 +6,7 @@ import { ThemeProvider } from "styled-components";
 import store from "./store";
 import themes from "./theme/themes";
 import GlobalStyles from "./styles/globalStyles";
-import App from "./App";
+import AppNew from "./AppNew";
 import { BrowserRouter } from "react-router-dom";
 
 // 🔥 Wrapper that listens to Redux theme state
@@ -19,7 +19,7 @@ function ThemedApp() {
       <ThemeProvider theme={currentTheme}>
         <BrowserRouter>
           <GlobalStyles />
-          <App />
+          <AppNew />
         </BrowserRouter>
       </ThemeProvider>
     </MuiThemeProvider>
