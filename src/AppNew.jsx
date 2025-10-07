@@ -13,14 +13,18 @@ import NewLogin from './components/Login/NewLogin';
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: 240px 1fr;  /* sidebar + main */
-  grid-template-rows: 64px 1fr 60px; /* header + content + footer */
-  grid-template-areas:
-    "header header"
-    "sidebar main"
-    "footer footer";
+  grid-template-columns: ${({ showSidebar }) =>
+    showSidebar ? '240px 1fr' : '1fr'};
+  grid-template-rows: 64px 1fr 50px;
+  grid-template-areas: ${({ showSidebar }) =>
+    showSidebar
+      ? `"header header"
+         "sidebar main"
+         "footer footer"`
+      : `"header header"
+         "main main"
+         "footer footer"`};
   min-height: 100vh;
- overflow-x: hidden;
 `;
 
 const HeaderWrapper = styled.header`
@@ -67,36 +71,37 @@ const AppNew = () => {
         {/* Login Page */}
 
         <Route path="/login" element={<NewLogin onLogin={handleLogin} />} />
-     
-      {/* Protected Layout */}
 
-      {/* dynamic routes rendered by Redux state */}
+        {/* Protected Layout */}
 
-      <Route
-        path="/*"
-        element={
-          <ProtectedRoute isAuthenticated={isAuthenticated}>
-            <Layout>
-              <HeaderWrapper>
-                <Header onLogout={handleLogout} />
-              </HeaderWrapper>
-              <SidebarWrapper>
-                <Sidebar />
-              </SidebarWrapper>
-              <MovingBackground />
-              <Main>
-                <h1>Welcome to React Starter</h1>
-                <p>Use the theme switcher in header to change colors.</p>
-                <RouterRender />
-                <AnimatedButton>Click me</AnimatedButton>
-              </Main>
-              <FooterWrapper>Footer area</FooterWrapper>
-            </Layout>
-          </ProtectedRoute>
-        }
-      />
+        {/* dynamic routes rendered by Redux state */}
 
- </Routes>
+        <Route
+          path="/*"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Layout showSidebar={false}>
+                <HeaderWrapper>
+                  <Header onLogout={handleLogout} />
+                </HeaderWrapper>
+                <SidebarWrapper style={{ display: false ? 'block' : 'none' }}>
+                  <Sidebar />
+                </SidebarWrapper>
+                <MovingBackground />
+                <Main>
+
+                  <RouterRender />
+                  {/* <AnimatedButton>Click me</AnimatedButton> */}
+                </Main>
+                <FooterWrapper>Footer area</FooterWrapper>
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* <Route path="*" element={<h2>Welcome! Back Page not found.</h2>} /> */}
+
+      </Routes>
 
 
     </>
