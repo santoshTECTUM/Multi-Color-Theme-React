@@ -5,32 +5,28 @@ import { setTheme } from '../../store/slices/themeSlice';
 import { setHeader } from '../../store/slices/headerSlice';
 import ThemeColor from '../../ThemeColor';
 import { menuObject } from '../HeaderObject';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 const Bar = styled.header`
   grid-area: header;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // background: rgba(255, 255, 255, 0.1);
-  // backdrop-filter: blur(12px);
-  // border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0 24px;
   height: 64px;
   z-index: 2;
 `;
 
-// Right section (theme switch + menu)
 const RightSection = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
 `;
 
-// Main menu
 const Menu = styled.ul`
   list-style: none;
   display: flex;
-  align-items:center;
+  align-items: center;
   gap: 20px;
   margin: 0;
   padding: 0;
@@ -45,20 +41,16 @@ const Menu = styled.ul`
       padding: 8px 12px;
       border-radius: 8px;
       transition: all 0.3s ease;
-      transition: all 0.3s ease;
       transform-origin: center;
+
       &:hover {
         background: rgba(255, 255, 255, 0.15);
         color: ${({ theme }) => theme.colors.accent};
-        transform: translateY(-2px) scale(1.1); /* lift + zoom */
+        transform: translateY(-2px) scale(1.1);
       }
     }
-a:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: ${({ theme }) => theme.colors.accent};
-  transform: translateY(-2px) scale(1.1);
-}
-    /* Submenu container */
+
+    /* Submenu styling */
     ul {
       list-style: none;
       position: absolute;
@@ -101,32 +93,47 @@ a:hover {
   }
 `;
 
-
 const Span = styled.span`
-margin: 5px;
-`
+  margin: 5px;
+  cursor: pointer;
+`;
 
-
-export default function Header({onLogout}) {
+export default function Header({ onLogout }) {
   const dispatch = useDispatch();
   const themeName = useSelector((s) => s.theme.name);
   const theme = ThemeColor[themeName] || ThemeColor.light;
-  const [activeMenu, setActiveMenu] = useState("Tabel"); // default active link
+  const [activeMenu, setActiveMenu] = useState(null);
   const navigate = useNavigate();
-  const toggleMenu = (menu) => {
-    setActiveMenu(activeMenu === menu ? null : menu.name);
-    let url = menu.sideMenu ? menu.sideMenu[0]?.url : menu.url
-    navigate(url)
+
+  const handleMenuClick = (menu, index) => {
+    dispatch(setHeader({ id: index, name: menu.name }));
+    setActiveMenu(menu.name);
+
+    // Navigation logic:
+    if (menu.submenu && menu.submenu.length > 0) {
+      // If submenu exists, stay here — submenu handled separately
+      return;
+    }
+
+    const url =
+      menu.sideMenu?.[0]?.url || menu.url || '/'; // fallback URL
+    navigate(url);
+  };
+
+  const handleSubmenuClick = (sub) => {
+    if (sub.url) {
+      navigate(sub.url);
+    }
   };
 
   return (
     <Bar>
       <div style={{ fontWeight: 700 }}>
-        <Span onClick={onLogout}  >Logo</Span> 
+        <Span onClick={onLogout}>Logo</Span>
         <select
           value={themeName}
           onChange={(e) => dispatch(setTheme(e.target.value))}
-        >activeMenu
+        >
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="ocean">Ocean</option>
@@ -138,42 +145,64 @@ export default function Header({onLogout}) {
 
       <RightSection>
         <Menu>
-          {menuObject.map((menu, index) => (
-            <li key={index}>
-              <a
-                // href={menu.url}
-                onClick={() => { toggleMenu(menu); dispatch(setHeader({ id: index, name: menu.name })); }}
-                style={{
-                  color: activeMenu === menu.name ? theme.colors.accent : undefined,
-                  fontWeight: activeMenu === menu.name ? "700" : "500",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                }}
-              >
-                {menu.icons && (
-                  <span title={menu.isTooltips ? menu.name : undefined}>
-                    {menu.icons}
-                  </span>
-                )}
-                {/* Conditionally hide or show menu name */}
-                {!menu.isTooltips && <span>{menu.name}</span>}
-              </a>
+          {menuObject.map((menu, index) => {
+            const hasSubmenu = menu.submenu && menu.submenu.length > 0;
+            const hasSideMenu = menu.sideMenu && menu.sideMenu.length > 0;
 
-              {menu.submenu && menu.submenu.length > 0 && (
-                <ul key={index}>
-                  {menu.submenu.map((sub, subIndex) => (
-                    <li key={subIndex}>
-                      <a href={sub.url || "#"}>
-                        {sub.icons && <span>{sub.icons}</span>}
-                        {sub.name}
+            return (
+              <li key={index}>
+                <a
+                  onClick={() => handleMenuClick(menu, index)}
+                  style={{
+                    color:
+                      activeMenu === menu.name
+                        ? theme.colors.accent
+                        : theme.colors.text,
+                    fontWeight: activeMenu === menu.name ? '700' : '500',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {menu.icons && (
+                    <span title={menu.isTooltips ? menu.name : undefined}>
+                      {menu.icons}
+                    </span>
+                  )}
+                  {!menu.isTooltips && <span>{menu.name}</span>}
+                </a>
+
+                {/* Submenu rendering */}
+                {hasSubmenu && (
+                  <ul>
+                    {menu.submenu.map((sub, subIndex) => (
+                      <li key={subIndex}>
+                        <a
+                          onClick={() => handleSubmenuClick(sub)}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          {sub.icons && <span>{sub.icons}</span>}
+                          {sub.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/*  Handle case where both submenu & sidemenu empty */}
+                {!hasSubmenu && !hasSideMenu && !menu.url && (
+                  <ul>
+                    <li>
+                      <a style={{ opacity: 0.5, pointerEvents: 'none' }}>
+                        No links
                       </a>
                     </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
         </Menu>
       </RightSection>
     </Bar>
