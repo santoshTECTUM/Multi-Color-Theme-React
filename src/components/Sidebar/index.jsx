@@ -2,7 +2,7 @@ import React, { memo, useState } from "react";
 import styled from "styled-components";
 import { Home, User, Settings, ChevronDown, ChevronRight } from "lucide-react"; // icon library
 import { useSelector } from "react-redux";
-import { menuObject } from "../theme/HeaderObject";
+import { menuObject } from "../HeaderObject";
 import { useLocation, useNavigate } from "react-router-dom";
 const Side = styled.aside`
   grid-area: sidebar;
@@ -21,13 +21,10 @@ const MenuItem = styled.div`
   cursor: pointer;
   margin-bottom: 4px;
   transition: all 0.25s ease;   /* smooth hover effect */
-  
   background: ${({ active, theme }) =>
     active ? theme.colors.secondary : "transpatrent"};
-  
   color: ${({ active, theme }) =>
     active ? "#fff" : theme.colors.text};
-
 // /* shutter layer */
 //   &::before {
 //     content: "";
@@ -88,13 +85,14 @@ const ActiveHeader = styled.div`
 `;
 
 
-const Sidebar = () => {
+const Sidebar = ({ showSidebar }) => {
   const navigate = useNavigate();
   const headerName = useSelector((s) => s.header.name);
   const headerIndex = useSelector((s) => s.header.id);
   const location = useLocation()
-  const menuItems = menuObject[headerIndex]?.sideMenu; // Assuming menuObject is imported or defined elsewhere
+  const menuItems = menuObject[headerIndex]?.sideMenu || []; // Assuming menuObject is imported or defined elsewhere
   const [openMenu, setOpenMenu] = useState(menuItems && menuItems[0]?.name || null);
+  showSidebar(menuItems?.length ? true : false)
   const toggleMenu = (menu, index) => {
     console.log("login menu:", index, menu, menuItems, menuItems[index - 1],);
     // if (!(index && menuItems[index - 1])) {
@@ -102,12 +100,14 @@ const Sidebar = () => {
     // }
     setOpenMenu(openMenu === menu.name ? menuItems[index - 1].name : menu.name);
     let url = openMenu === menu?.name ? -1 : menu.url
-    console.log("navigate to :", url ,"location", location);
+    console.log("navigate to :", url, "location", location);
     navigate(url)
   };
 
 
-  // console.log(headerName, headerIndex, menuItems, menuObject[headerIndex]?.sideMenu);
+
+
+  // console.log("header--Name", headerName, "headerIndex", headerIndex, "menuItems", menuItems, "menuObject", menuObject[headerIndex]?.sideMenu);
 
   return (
     <>
@@ -115,7 +115,7 @@ const Sidebar = () => {
         {headerName || "Welcome!"}
       </ActiveHeader>
       <Side>
-        <nav> 
+        <nav>
           {menuItems?.length ? menuItems?.map((item, index) => (
             <MenuItem key={index} active={openMenu === item.name} onClick={() => toggleMenu(item, index)}>
               <div style={{ display: "flex", alignItems: "center" }}>
@@ -123,8 +123,6 @@ const Sidebar = () => {
               </div>
             </MenuItem>
           )) : ""}
-
-
 
           {/* <div>
             <MenuItem

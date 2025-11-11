@@ -1,15 +1,16 @@
 import React, { memo, useState } from 'react';
 import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+// import Sidebar from './components/Sidebar';
 import MovingBackground from './components/MovingBackground';
 import AnimatedButton from './components/AnimatedButton';
 import styled from 'styled-components';
 import { Outlet, Route, Routes } from 'react-router-dom';
-import RouterRender from './theme/RouterRender';
+import MainContent from './components/MainContent';
 // import Login from './theme/Login';
 // import Login from './components/Login';
-import ProtectedRoute from './theme/Protected';
+import ProtectedRoute from './components/Protected';
 import NewLogin from './components/Login/NewLogin';
+import Sidebar from './components/Sidebar';
 
 const Layout = styled.div`
   display: grid;
@@ -21,9 +22,9 @@ const Layout = styled.div`
       ? `"header header"
          "sidebar main"
          "footer footer"`
-      : `"header header"
-         "main main"
-         "footer footer"`};
+      : `"header"
+         "main"
+         "footer"`};
   min-height: 100vh;
 `;
 
@@ -61,7 +62,7 @@ const FooterWrapper = styled.footer`
 
 const AppNew = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-
+const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const handleLogin = () => setIsAuthenticated(true);
   const handleLogout = () => setIsAuthenticated(false);
 
@@ -80,17 +81,17 @@ const AppNew = () => {
           path="/*"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Layout showSidebar={false}>
+              <Layout showSidebar={isSidebarVisible}>
                 <HeaderWrapper>
                   <Header onLogout={handleLogout} />
                 </HeaderWrapper>
-                <SidebarWrapper style={{ display: false ? 'block' : 'none' }}>
-                  <Sidebar />
+                <SidebarWrapper style={{ display: isSidebarVisible ? 'block' : 'none' }}>
+                  <Sidebar showSidebar={setIsSidebarVisible} />
                 </SidebarWrapper>
                 <MovingBackground />
                 <Main>
 
-                  <RouterRender />
+                  <MainContent />
                   {/* <AnimatedButton>Click me</AnimatedButton> */}
                 </Main>
                 <FooterWrapper>Footer area</FooterWrapper>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTheme } from '../store/slices/themeSlice';
-import themes from '../theme/themes';
-import { menuObject } from '../theme/HeaderObject';
-import { setHeader } from '../store/slices/headerSlice';
+import { setTheme } from '../../store/slices/themeSlice';
+import { setHeader } from '../../store/slices/headerSlice';
+import ThemeColor from '../../ThemeColor';
+import { menuObject } from '../HeaderObject';
 import { Navigate, useNavigate } from 'react-router-dom';
 const Bar = styled.header`
   grid-area: header;
@@ -110,7 +110,7 @@ margin: 5px;
 export default function Header({onLogout}) {
   const dispatch = useDispatch();
   const themeName = useSelector((s) => s.theme.name);
-  const theme = themes[themeName] || themes.light;
+  const theme = ThemeColor[themeName] || ThemeColor.light;
   const [activeMenu, setActiveMenu] = useState("Tabel"); // default active link
   const navigate = useNavigate();
   const toggleMenu = (menu) => {

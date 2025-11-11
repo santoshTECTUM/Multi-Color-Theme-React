@@ -8,7 +8,7 @@ import {
   ThemedHeaderCell,
   ThemedRow,
   ThemedCell,
-} from "../../theme/TableStyleComponet";
+} from "../../ThemeColor/TableStyleComponet";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };

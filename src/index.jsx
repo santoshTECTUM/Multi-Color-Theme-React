@@ -4,7 +4,7 @@ import { Provider, useSelector } from "react-redux";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "styled-components";
 import store from "./store";
-import themes from "./theme/themes";
+import themes from "./ThemeColor";
 import GlobalStyles from "./styles/globalStyles";
 import AppNew from "./AppNew";
 import { BrowserRouter } from "react-router-dom";

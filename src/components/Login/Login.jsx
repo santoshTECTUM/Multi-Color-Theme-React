@@ -89,7 +89,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const   handleSubmit = (e) => {
         e.preventDefault();
         if (username === "admin" && password === "1234") {
             localStorage.setItem("isAuthenticated", "true");
