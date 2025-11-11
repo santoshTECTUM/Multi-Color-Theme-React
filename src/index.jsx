@@ -8,6 +8,7 @@ import themes from "./ThemeColor";
 import GlobalStyles from "./styles/globalStyles";
 import AppNew from "./AppNew";
 import { BrowserRouter } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // 🔥 Wrapper that listens to Redux theme state
 function ThemedApp() {
@@ -28,7 +29,10 @@ function ThemedApp() {
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <ThemedApp />
-  </Provider>
+  <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+
+    <Provider store={store}>
+      <ThemedApp />
+    </Provider>
+  </GoogleOAuthProvider>
 );

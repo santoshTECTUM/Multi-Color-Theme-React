@@ -11,6 +11,7 @@ import MainContent from './components/MainContent';
 import ProtectedRoute from './components/Protected';
 import NewLogin from './components/Login/NewLogin';
 import Sidebar from './components/Sidebar';
+import Sso from './components/Login/Sso';
 
 const Layout = styled.div`
   display: grid;
@@ -62,7 +63,7 @@ const FooterWrapper = styled.footer`
 
 const AppNew = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const handleLogin = () => setIsAuthenticated(true);
   const handleLogout = () => setIsAuthenticated(false);
 
@@ -71,7 +72,7 @@ const [isSidebarVisible, setIsSidebarVisible] = useState(true);
       <Routes>
         {/* Login Page */}
 
-        <Route path="/login" element={<NewLogin onLogin={handleLogin} />} />
+        <Route path="/login" element={<Sso onLogin={handleLogin} />} />
 
         {/* Protected Layout */}
 
